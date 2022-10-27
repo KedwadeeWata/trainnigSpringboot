@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Service
 public class HelloService {
     public String helloService(){
-        return "sa wee dee";
+        return "Sa Wee Das";
 
     }
 
