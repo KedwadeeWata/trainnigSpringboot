@@ -1,9 +1,9 @@
 package com.example.trainnigSpring.repository;
 
-import com.example.trainnigSpring.entity.StudentEntity;
+import com.example.trainnigSpring.entity.ScheduleEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface StudentRepository extends JpaRepository<StudentEntity,Integer> {
+public interface ScheduleRepository extends JpaRepository<ScheduleEntity,Integer> {
 }

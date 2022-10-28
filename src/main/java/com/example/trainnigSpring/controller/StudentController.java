@@ -2,6 +2,7 @@ package com.example.trainnigSpring.controller;
 
 import com.example.trainnigSpring.entity.StudentEntity;
 import com.example.trainnigSpring.model.StudentRequest;
+import com.example.trainnigSpring.model.StudentResponse;
 import com.example.trainnigSpring.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +18,7 @@ public class StudentController {
     StudentService studentService;
 
     @PostMapping("/add")
-    public ResponseEntity<StudentEntity> add(@RequestBody StudentRequest StudentRequest) {
+    public ResponseEntity<StudentResponse> add(@RequestBody StudentRequest StudentRequest) {
         try {
             return ResponseEntity.ok(studentService.add(StudentRequest));
         } catch (Exception exception) {

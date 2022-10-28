@@ -63,7 +63,7 @@ public class SubjectRepository {
 
         subjectEntities.forEach((q)->{
             SubjectResponse subjectResponse1 = new SubjectResponse();
-                subjectResponse1.setSubjectName(q.getSubjectName());
+                /*subjectResponse1.setSubjectName(q.getSubjectName());*/
                 subjectResponse1.setCredit(q.getCredit());
                subjectResponse1.setTeacherName(q.getTeacherName());
                subjectResponse.add(subjectResponse1);
