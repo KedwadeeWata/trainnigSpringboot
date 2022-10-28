@@ -3,7 +3,6 @@ package com.example.trainnigSpring.controller;
 import com.example.trainnigSpring.entity.StudentEntity;
 import com.example.trainnigSpring.model.StudentRequest;
 import com.example.trainnigSpring.service.StudentService;
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,15 +26,15 @@ public class StudentController {
     }
 
 
-        @GetMapping("/getall")
-        public ResponseEntity<List<StudentEntity>> getAll() {
-            try {
-                return new ResponseEntity<>(studentService.getAll(), HttpStatus.OK);
-            } catch (Exception exception) {
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            }
-
+    @GetMapping("/getall")
+    public ResponseEntity<List<StudentEntity>> getAll() {
+        try {
+            return new ResponseEntity<>(studentService.getAll(), HttpStatus.OK);
+        } catch (Exception exception) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+
+    }
 
 
     //ค้นหา
@@ -48,22 +47,20 @@ public class StudentController {
         }
 
     }
+
     @PostMapping("/edit/{id}")
-    public ResponseEntity<StudentEntity> edit(@PathVariable("id") Integer id,@RequestBody StudentRequest studentRequest) {
+    public ResponseEntity<StudentEntity> edit(@PathVariable("id") Integer id, @RequestBody StudentRequest studentRequest) {
         try {
-            return ResponseEntity.ok(studentService.edit(id,studentRequest));
+            return ResponseEntity.ok(studentService.edit(id, studentRequest));
         } catch (Exception exception) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
     @DeleteMapping("/delete/{id}")
-    public void delete(@PathVariable Integer id){
+    public void delete(@PathVariable Integer id) {
         studentService.delete(id);
     }
-
-
-
 
 
 }

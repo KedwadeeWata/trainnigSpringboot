@@ -4,6 +4,8 @@ import com.example.trainnigSpring.entity.SubjectEntity;
 import com.example.trainnigSpring.entity.SubjectEntity;
 import com.example.trainnigSpring.model.SubjectRequest;
 import com.example.trainnigSpring.model.SubjectRequest;
+import com.example.trainnigSpring.model.SubjectResponse;
+import com.example.trainnigSpring.repository.SubjectRepository;
 import com.example.trainnigSpring.service.SubjectService;
 import com.example.trainnigSpring.service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,18 +21,20 @@ public class SubjectController {
     @Autowired
     SubjectService subjectService;
 
+    @Autowired
+    SubjectRepository subjectRepository;
+
     @PostMapping("/add")
-    public ResponseEntity<SubjectEntity> add(@RequestBody SubjectRequest subjectRequest) {
-        try {
-            return ResponseEntity.ok(subjectService.add(subjectRequest));
-        } catch (Exception exception) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+    public SubjectResponse add(@RequestBody SubjectRequest subjectRequest) {
+        return subjectRepository.save(subjectRequest);
     }
 
-
+    @PostMapping("/edit/{id}")
+    public SubjectResponse edit(@PathVariable("id") Integer id , @RequestBody SubjectRequest subjectRequest) {
+        return subjectRepository.edit(id, subjectRequest);
+    }
     @GetMapping("/getall")
-    public ResponseEntity<List<SubjectEntity>> getAll() {
+    public ResponseEntity<List<SubjectResponse>> getAll() {
         try {
             return new ResponseEntity<>(subjectService.getAll(), HttpStatus.OK);
         } catch (Exception exception) {
@@ -52,19 +56,12 @@ public class SubjectController {
         }
 
     }
-    @PostMapping("/edit/{id}")
-    public ResponseEntity<SubjectEntity> edit(@PathVariable("id") Integer id , @RequestBody SubjectRequest subjectRequest) {
-        try {
-            return ResponseEntity.ok(subjectService.edit(id,subjectRequest));
-        } catch (Exception exception) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-    }
 
+/*
     @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable Integer id){
         subjectService.delete(id);
-    }
+    }*/
 
 }
 
