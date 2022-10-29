@@ -4,18 +4,13 @@ import com.example.trainnigSpring.entity.ClassEntity;
 import com.example.trainnigSpring.entity.ScheduleEntity;
 import com.example.trainnigSpring.entity.StudentEntity;
 import com.example.trainnigSpring.entity.SubjectEntity;
-import com.example.trainnigSpring.model.ScheduleRequest;
-import com.example.trainnigSpring.model.ScheduleResponse;
-import com.example.trainnigSpring.model.StudentRequest;
-import com.example.trainnigSpring.model.StudentResponse;
-import com.example.trainnigSpring.repository.ClassRepository;
+import com.example.trainnigSpring.model.*;
 import com.example.trainnigSpring.repository.ScheduleRepository;
-import com.example.trainnigSpring.repository.StudentRepository;
-import com.example.trainnigSpring.repository.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import static com.example.trainnigSpring.model.StudentRequest.*;
+import java.io.IOException;
+import java.util.List;
 
 @Service
 public class ScheduleService {
@@ -26,12 +21,13 @@ public class ScheduleService {
     StudentService StudentService;
 
     @Autowired
-    ClassRepository classRepository;
+    ClassService ClassService;
 
     @Autowired
-    SubjectRepository subjectRepository;
+    SubjectService SubjectService;
 
     public ScheduleResponse add(ScheduleRequest scheduleRequest) {
+
         ScheduleEntity scheduleEntity = new ScheduleEntity();
         scheduleEntity.setStudentId(scheduleRequest.getStudentId());
         scheduleEntity.setClassId(scheduleRequest.getClassId());
@@ -47,31 +43,34 @@ public class ScheduleService {
         studentRequest.setStudentClass(studentEntity.getStudentClass());
         scheduleResponse.setStudentId(studentRequest);
 
+        ClassRequest classRequest = new ClassRequest();
+        ClassEntity classEntity = ClassService.getById(scheduleRequest.getClassId());
+        classRequest.setSecClass(classEntity.getSecClass());
+        classRequest.setNumberStudentClass(classEntity.getNumberStudentClass());
+        scheduleResponse.setClassId(classRequest);
+
+        SubjectRequest subjectRequest = new SubjectRequest();
+        SubjectEntity subjectEntity = SubjectService.getById(scheduleRequest.getSubjectId());
+        subjectRequest.setSubjectName(subjectEntity.getSubjectName());
+        subjectRequest.setCredit(subjectEntity.getCredit());
+        subjectRequest.setTeacherName(subjectEntity.getTeacherName());
+        scheduleResponse.setSubjectId(subjectRequest);
+
         return scheduleResponse;
-       /*
-        ClassEntity classEntity = new ClassEntity();
-        scheduleEntity.setClassId(scheduleService.getClassId());
-        scheduleEntity.setSubjectId(scheduleService.getSubjectId());
-        classRepository.save(classEntity);
-
-        SubjectEntity subjectEntity = new SubjectEntity();
-        subjectEntity.setSubjectName(scheduleService.getSubjectId);
-        subjectEntity.setCredit(scheduleService.getCredit);
-        subjectEntity.setTeacherName(scheduleService.getTeacherName);
-        subjectRepository.save(subjectEntity);*/
 
 
 
-        /*return scheduleRespone;*/
- /*   }
-    public List<ScheduleEntity> getAll(){
+
+
+    }
+   /* public List<ScheduleEntity> getAll(){
         return scheduleRepository.findAll();
     }
     public ScheduleEntity getById(Integer id){
         return scheduleRepository.findById(id).get();
     }
 
-    public ScheduleEntity edit(Integer id,ScheduleRequest scheduleRequest ) throws Exception{
+    public ScheduleResponse edit(Integer id,ScheduleRequest scheduleRequest ){
         if(scheduleRequest.findId(id).get() == null){
             throw new Exception();
 throw new IOException("null id");
@@ -82,12 +81,12 @@ throw new IOException("null id");
         scheduleEntity.setStudentName(scheduleRequest.getStudentName());
         scheduleEntity.setSubjectId(scheduleRequest.getSubjectId());
         scheduleEntity.setSubjectName(scheduleRequest.getSubjectName());
-        return scheduleRepository.edit(id,scheduleEntity);
+        return scheduleRepository.edit(id,subjectRequest);
 
     }
     public void delete(Integer id) {
         scheduleRepository.deleteById(id);
     }*/
 
-    }
+
     }

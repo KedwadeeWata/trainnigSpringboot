@@ -11,6 +11,7 @@ import javax.persistence.*;
 public class ClassEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer classId;
     private Integer secClass;
     private Integer numberStudentClass;
 

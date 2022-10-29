@@ -15,4 +15,5 @@ public class SubjectEntity {
     public Integer credit;
     public String teacherName;
 
+
 }

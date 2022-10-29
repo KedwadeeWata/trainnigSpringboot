@@ -9,26 +9,27 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/schedule")
 public class ScheduleController {
     @Autowired
-    ScheduleService scheduleService;
+    ScheduleService ScheduleService;
 
-   /* @PostMapping("/add")
+    @PostMapping("/add")
     public ResponseEntity<ScheduleResponse> add(@RequestBody ScheduleRequest scheduleRequest) {
         try {
-            return ResponseEntity.ok(scheduleService.add(ScheduleResponse));
+            return ResponseEntity.ok(ScheduleService.add(scheduleRequest));
         } catch (Exception exception) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-    }*/
+    }
 
-/*
-    @GetMapping("/getall")
+    /*@GetMapping("/getall")
     public ResponseEntity<List<ScheduleEntity>> getAll() {
         try {
-            return new ResponseEntity<>(scheduleService.getAll(), HttpStatus.OK);
+            return new ResponseEntity<>(ScheduleService.getAll(), HttpStatus.OK);
         } catch (Exception exception) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -40,7 +41,7 @@ public class ScheduleController {
     @GetMapping("/getall/{id}")
     public ResponseEntity<ScheduleEntity> getById(@PathVariable("id") Integer id) {
         try {
-            return ResponseEntity.ok(scheduleService.getById(id));
+            return ResponseEntity.ok(ScheduleService.getById(id));
         } catch (Exception exception) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -48,9 +49,9 @@ public class ScheduleController {
     }
 
     @PostMapping("/edit/{id}")
-    public ResponseEntity<ScheduleEntity> edit(@PathVariable("id") Integer id, @RequestBody ScheduleRequest scheduleRequest) {
+    public ResponseEntity<ScheduleResponse> edit(@PathVariable("id") Integer id, @RequestBody ScheduleRequest scheduleRequest) {
         try {
-            return ResponseEntity.ok(scheduleService.edit(id, scheduleRequest));
+            return ResponseEntity.ok(ScheduleService.edit(id, scheduleRequest));
         } catch (Exception exception) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -58,6 +59,6 @@ public class ScheduleController {
 
     @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable Integer id) {
-        scheduleService.delete(id);
+        ScheduleService.delete(id);
     }*/
 }
